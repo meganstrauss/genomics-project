@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Pathogen Phylogeny Builder</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+<header>
+  <div class="brand">
+    <span class="kicker">Pathogen Genomics Suite</span>
+    <h1>Phylogeny Builder</h1>
+    <p class="sub">Reconstructs viral lineage trees from genomic distance and replays their divergence across collection years.</p>
+  </div>
+  <div class="readout">
+    <div><span class="rk">organism</span><span class="rv" id="rOrg">Influenza A</span></div>
+    <div><span class="rk">taxa</span><span class="rv" id="rTaxa">—</span></div>
+    <div><span class="rk">method</span><span class="rv">NJ · k-mer</span></div>
+    <div><span class="rk">data</span><span class="rv" id="rData">synthetic</span></div>
+  </div>
+</header>
+
+<div class="toolbar">
+  <button id="btnRun" class="run">Run pipeline</button>
+  <span class="step" id="step"></span>
+  <div class="spacer"></div>
+  <div class="time-control" id="timeControl" hidden>
+    <button id="btnPlay" class="ghost">▶ play timeline</button>
+    <input type="range" id="yearSlider" min="0" max="100" value="100" />
+    <span class="year-label" id="yearLabel"></span>
+  </div>
+</div>
+
+<main>
+  <section class="tree-stage">
+    <svg id="tree" viewBox="0 0 760 640" preserveAspectRatio="xMidYMid meet"></svg>
+    <div class="tooltip" id="tip"></div>
+    <div class="clade-key" id="cladeKey"></div>
+  </section>
+
+  <aside class="side">
+    <div class="card">
+      <h2>Clade emergence</h2>
+      <div id="emergence" class="emergence"><p class="empty">Run the pipeline to trace clades.</p></div>
+    </div>
+    <div class="card">
+      <h2>Method</h2>
+      <p class="method">Each sequence is reduced to its set of length-<em>k</em> subsequences;
+        pairwise distance is the Jaccard distance over those sets. A
+        neighbor-joining tree is built from the distance matrix, then leaves are
+        keyed by collection year so the timeline can reveal lineages in the
+        order they appeared.</p>
+      <p class="newick-label">Newick</p>
+      <code id="newick" class="newick">—</code>
+    </div>
+  </aside>
+</main>
+
+<footer>
+  <span>Pathogen Genomics Suite · Phylogeny Builder</span>
+  <a href="#" id="toAmr">AMR Gene Atlas →</a>
+</footer>
+
+<script src="app.js"></script>
+</body>
+</html>

@@ -1,0 +1,21 @@
+services:
+  phylogeny:
+    build: .
+    command: python cli.py serve phylo --host 0.0.0.0 --port 8000
+    ports:
+      - "8000:8000"
+    environment:
+      - PHYLO_DB_PATH=/app/data/phylo.db
+      - PGS_ALLOW_NETWORK=0
+    volumes:
+      - ./data:/app/data
+
+  amr_atlas:
+    build: .
+    command: python cli.py serve amr --host 0.0.0.0 --port 8001
+    ports:
+      - "8001:8001"
+    environment:
+      - AMR_DB_PATH=/app/data/amr.db
+    volumes:
+      - ./data:/app/data
